@@ -1,0 +1,14 @@
+# Local game material and generated artifacts must never enter the repository.
+/local/
+/roms/
+/generated/
+/build/
+/runs/
+/checkpoints/
+*.z64
+*.n64
+*.v64
+*.rom
+*.sav
+*.state
+.DS_Store
