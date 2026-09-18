@@ -1,81 +1,93 @@
-# Mario Kart 64 learning agent
+# Spotted
 
-We will teach an AI driver to race in Mario Kart 64, show how it improves, and let visitors race against it. Three people build the training system and agent. Four build the website and playable demo, and produce the course videos.
+**A camera-first wildlife app for McMaster students and casual Hamilton walkers: capture a discovery, learn what it might be, and choose whether to share it.**
 
-## How it works
+The feel is playful collecting with a calm map and a photo-led social feed. We will use Expo/React Native, begin prototyping in Expo Go, and use Google Maps. iPhone is the first supported platform; Android is deferred until the iPhone experience is stable. The app opens on the camera after a short first-use tutorial. Nearby discovery remains central through the Map tab.
 
-**Reinforcement learning (RL)** means learning through trial and error. The agent observes the race, chooses controls, and receives rewards for useful behavior such as making progress. Repeating this process should produce a better driver. We judge improvement by completed races and race times, not just its training reward.
+## Four tabs with clear jobs
 
-Training needs many attempts. **Native recompilation** translates the game’s instructions into code a modern computer can run. N64Recomp is a tool for that translation; it does not automatically provide a working training system. We still need to start races, control inputs and advance the game reliably.
+| Tab | Purpose | First version |
+| --- | --- | --- |
+| Feed | Enjoy other people's discoveries | Photo-led chronological local feed, captions, species suggestions and approximate areas. Proposed: appreciation reactions and saving posts, without public popularity scores. |
+| Map | Find out what people have seen nearby | Google Maps with approximate sighting areas, time/species filters, a list alternative and a sighting preview. Historical records are a separate labeled layer. |
+| Camera | Capture the moment | Default opening screen. Take or select a photo, crop/retake, request identification, then review before saving or sharing. |
+| Wildlife | Learn and build your collection | My Discoveries and a small local field guide. Species pages show your encounters, identification tips and personal milestone badges. |
 
-During training, we aim to run **headless**: without drawing the screen or playing audio. This may let us generate experience faster. We must first prove that it works correctly and is meaningfully faster than real time. **Deterministic** means the same starting conditions and inputs reproduce the same outcome on the tested setup.
+A profile/avatar opens your public photo grid, account settings, privacy controls and drafts. It does not need another tab. Followed accounts and comments are possible additions; direct messaging is outside the first version.
+
+The references describe a feel: Snapchat's immediate camera access and VSCO's emphasis on photographs. Spotted's interaction is built around wildlife observations, not copying either app's full feature set.
+
+## First-use tutorial and main journey
+
+Keep the tutorial short and skippable: **Capture → Learn → Choose what to share.** Show that identification is a suggestion and that public locations are approximate. Ask for camera access when entering the camera, location when using nearby sightings or adding a location, and photo access when selecting an image. If permission is declined, browsing and manual area selection still work. Account creation can wait until a user wants to share.
+
+The main journey is **photo → suggested species → review → save privately or publish**. Low confidence offers a retake, a broader label or an unidentified entry. Nothing posts automatically. Private discoveries count toward collection milestones too; users do not need to share to progress.
+
+Badges celebrate a first discovery or several different supported species. No leaderboards, rarity bonuses, follower competitions or streak penalties. Seasonal challenges can follow the core experience. Corrected identifications and duplicate photos must not produce false collection progress.
+
+## What good frontend means here
+
+Use large photos, restrained nature-inspired colours, readable text and consistent controls. Let the camera and photography lead; keep map overlays quiet. A subtle animation can celebrate a discovery without interrupting the next action.
+
+Design the whole experience, including denied permissions, an empty local feed, uncertain identification, failed uploads and offline drafts. Preserve an unfinished photo when switching tabs, pause the camera when it is not visible, and show which entries are private, queued or shared. These details matter more than adding extra tabs.
+
+## How the system fits together
+
+**Machine learning (ML)** learns from labeled photographs. We adapt an existing image model to a small set of familiar local birds and mammals. **On-device inference** means the phone runs that trained model; training happens separately on a development computer. Exact species depend on usable data and field testing.
 
 ```mermaid
 flowchart LR
-    Game[Locally running game] -->|Race observations| Agent[Learning agent]
-    Agent -->|Controller inputs| Game
-    Game -->|Measured results| Website[Website and progress display]
-    Agent -->|Trained driver| Demo[Local human versus AI demo]
+    Data[Permitted images and training] --> Model[Identification model on phone]
+    Camera[Photo capture] --> Model
+    Model --> Review[User reviews suggestions]
+    Review --> Private[Private collection and drafts]
+    Review -->|Choose to share| Backend[Accounts photos sightings and privacy]
+    Backend --> Social[Feed profiles and Google Map]
 ```
 
-The game and training run locally. The public website presents the project and its results. At the booth, a local demo connects a human controller and the trained agent to the same race. Browser-based game streaming would be separate scope.
+The **backend** is the shared service storing accounts, photos and sightings. Google Maps supplies the base map; our backend supplies wildlife posts. Private drafts should work offline. Sharing needs a connection and must recover without creating duplicate posts. Offline identification remains a target to prove on an actual phone, not a benefit we claim from an online prototype.
 
-## What goes on the website
+Expo Go is the starting preview app, not a permanent technical constraint. `expo-camera` and `react-native-maps` support early prototypes. Plan an Expo development build—a test installation containing our chosen native libraries—for model integration and actual Google Maps configuration. Validate Google Maps and the chosen ML runtime on a physical iPhone early, including the development-build installation path. Record the test iPhone model and iOS version. Do not substitute `expo-maps` assuming equivalent Expo Go or iOS Google Maps support. [Technical sources](course-requirements.md#expo-and-google-maps).
 
-| Area | What visitors can do | What we build |
-| --- | --- | --- |
-| Meet the agent | Understand the idea and watch a short demonstration | Clear introduction and a simple explanation of learning through practice |
-| Training progress | See whether the agent actually improves | Charts of race completion and lap times, with dated agent versions and labeled replay clips |
-| Compare drivers | Compare an early agent, current agent and simple baseline | Selectable results showing track, race settings, sample count and failures |
-| Race the agent | Find booth instructions or set up the local demo | Setup guide, supported hardware, controller instructions and troubleshooting |
+Use React Native with TypeScript, Expo Router for navigation, and Google Maps through `react-native-maps`. Backend provider and ML runtime remain decisions for the two groups after a small compatibility test. Do not add a separate website.
 
-Start with saved, verified results that the website loads. Live training updates and a grid of races are optional once the basic experience works. A small local results file is enough initially; the website does not need to control training.
+## Two groups
 
-The booth interface adds race selection, controller status, start/restart and results. It can share the website’s visual design while running locally. A public visitor cannot start a race on the booth computer through the website.
-
-## Seven people in two groups
-
-These are proposed ownership areas; names and strengths still need assigning. Both groups contribute to testing and documents.
-
-| Person | Main responsibility |
+| Group | Shared responsibility |
 | --- | --- |
-| You | Agent training and experiment choices, plus scrum coordination with Codex support |
-| Person 2 | Make the game run fast and reliably for training; connect game state and controls to the agent |
-| Person 3 | Training implementation, repeatable evaluation and comparing agent versions |
-| Person 4 | Website layout, explanations and accessible navigation |
-| Person 5 | Results integration, progress charts and driver comparisons |
-| Person 6 | Playable demo, controllers, race controls and recovery when something fails |
-| Person 7 | Demo setup and usability testing, replay/video capture, course videos and user guide |
+| **App and product — 4 people, including you** | Frontend, tutorial, camera journey, social features, Google Map, backend, privacy, release and demo experience. You also coordinate scrum with Codex assistance. |
+| **Identification and data — 3 people** | Species/data selection, licensing, model training, phone-ready model delivery, field-guide content and performance evaluation. |
 
-All three agent-group members work on learning, but the environment must work first. Person 2 should pair with the other two on that initial dependency. The four-person product group owns working software and its presentation: videos alone would leave too little technical ownership for a full-year project. Person 7 therefore also owns setup and test automation for the demo.
+Assume equal skill and competence. Each group divides its own work; this document does not assign individual jobs. Both contribute to testing, documentation and videos. Integrate weekly, and rebalance when needed.
 
-The groups agree on two shared outputs: a trained agent the demo can load, and a results file the website can display. Each includes the agent version and supported race settings. Integrate weekly so the website reflects actual progress. Early mock data must be clearly labeled and replaced before demonstrating results.
+Agree early on the handoff: a photo goes in; species suggestions or an unknown result come out, with a stable species identifier and model version. The app group connects the model; the identification group supports integration and explains its limits. Initially, clearly labeled sample responses let app work proceed without waiting for training. They never count as working ML evidence.
 
-## Phases and course check-ins
+## Build in this order
 
-| When | Agent group shows | Website and demo group shows |
-| --- | --- | --- |
-| Sep 21 selection; Sep 27 internal feasibility decision | Evidence that the game can advance reliably and faster than real time, or a clear blocker | Website outline and a credible local race/setup plan |
-| Oct 9 requirements and plan | Agreed training scope and success measures | Agreed website/demo journeys and ownership |
-| Nov 23 proof of concept | Working game control and an agent rollout | First real results on the site and a two-minute video showing working code; plan upload Nov 22 |
-| Jan 25 design and testing document | Training progress and repeatable tests | Connected results display, demo integration and usability tests |
-| Apr 5 final submission and video | Evaluated agent, reproducible results and usable installation | Finished website, human-versus-agent race, user guide, final video and poster |
-| EXPO, date TBD | Frozen agent ready to race | Reliable booth setup and recovery procedure |
+1. **Design the journey:** wireframe the tutorial, four tabs and capture-to-share flow. Choose typography/colours and one complete visual example. Walk through it with a few target users.
+2. **Make it feel real in Expo Go:** camera, navigation, local drafts and sample feed/map/collection content. Check Google Maps on the available phones. In parallel, test a small model/data sample and its phone runtime.
+3. **Connect one complete discovery:** a real photo gets a real suggestion, saves privately, then optionally becomes a protected post visible on a second phone. Move to a development build when native integration requires it.
+4. **Complete the product:** accounts, photo profiles, basic badges, filtering, reporting/deletion, offline recovery and field-guide content. Add richer social interaction only after the main flow works.
+5. **Validate and present:** independent field photos, device performance, privacy tests, new-user walkthroughs and an installable staff demo. Use a separate demo dataset for printed-animal photos.
 
-Book two instructor reviews and at least one TA deep dive per semester. Bring a working demonstration, measured progress and the next decision. You coordinate priorities and blockers; owners remain responsible for their components. Record actual meeting attendance in `meetings/`.
+| Course checkpoint | Evidence |
+| --- | --- |
+| Sep 21 selection; Sep 28 topic freeze | Clear scope, group ownership, permitted sample data and device feasibility |
+| Oct 9 requirements and plan | Agreed journeys, model baseline, numerical acceptance targets and schedule |
+| Nov 23 proof of concept | Real capture-to-identification-to-map flow; two-minute video, upload planned Nov 22 |
+| Jan 25 design and testing | Integrated app, model evaluation, privacy and offline tests |
+| Apr 5 final; EXPO date TBD | Tested release, real sightings, user guide, measured results, video and poster |
 
-## Scope and success
+Book two instructor reviews and one TA deep dive per semester. The [course reference](course-requirements.md) retains submission details.
 
-**Required (P1):** reliable game control, a trained single-agent driver, repeatable evaluation, a website showing real results, and a working human-versus-agent demo. Measure simulation speed, repeated-run consistency, race completion, race time and demo reliability. Set numerical targets after the initial experiment, before the requirements submission.
+## Boundaries and evidence
 
-**Later:** multiple learning agents racing with items (P2), a live race grid and leaderboard (P3). P0 means a blocking failure; P4 records future ideas. Optional work must not delay the required system.
+Approximate pins suit common wildlife; sensitive sightings may need park-level summaries, delay or suppression. Apply protection on the backend, strip embedded photo coordinates, preserve imported location uncertainty and provide preview/deletion/reporting. Photos containing identifiable bystanders need review and crop/removal options. The map describes reported sightings, not animal abundance. Historical records keep their original dates and sources.
 
-Users provide a legally obtained game ROM, meaning their local game file. We do not supply ROMs, extracted assets or derived game data. Agree with the advisor what results/recordings can be published and how staff can run the demo without manual compilation. Local generation alone does not settle publication or licensing questions.
+Test per-species accuracy, confidently wrong predictions, unfamiliar/non-animal photos, model size and response time on named devices. Keep independent test observations separate from training. Check app usability, private-location leakage and upload recovery too.
 
-The topic freezes **September 28**. If the native approach cannot be demonstrated by September 27, discuss scope with the instructor before committing. Hardware, ROM access, teammate names and official submission templates remain open. No performance or learning results have been measured yet.
+Seek already offers identification and badges; iNaturalist provides shared observations; Merlin supports bird discovery. Our proposed distinction is a welcoming camera-to-community experience for local walkers, with personal collecting and responsible sharing. Validate it with users rather than claim these individual features are new. [Research notes](course-requirements.md#spotted-research-notes).
 
-## Sources and revisions
+Open decisions: available test iPhone and iOS version, exact species, backend/model runtime, identification review rules, and whether following/comments belong in the first release. P1 is the complete capture, identification, collection and protected sharing experience; seasonal challenges are P3. No implementation or measured performance exists yet.
 
-[Course requirements and technical references](course-requirements.md) provide the supporting sources. This is a project overview, not an official submission template.
-
-Version 0.2: replaced the detailed plan and slide deck with this overview; adopted the user’s three-person agent group and four-person website/demo group. Version 0.1 established the initial concept. User: idea, team split and scope feedback. OpenAI Codex: source review and drafting. Human review and named contributor assignments remain pending.
+Version 0.8, 17 September 2026: selected iPhone first, with Android deferred. Version 0.7: camera-first Expo/Google Maps direction, four-tab proposal and two self-organizing groups; user belongs to the group of four. Versions 0.3–0.6 established Spotted, audience, wildlife scope and noncompetitive personality. User supplied the direction; Codex researched and drafted. Human review pending. Internal overview, not a submission template.

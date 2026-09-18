@@ -1,9 +1,9 @@
-# Mario Kart 64 learning agent
+# Spotted
 
-McMaster COMP SCI 4ZP6, 2026–2027. We will train an AI racer, show its progress on a website, and let visitors race it locally.
+McMaster COMP SCI 4ZP6, 2026–2027. A camera-first phone app for McMaster students and casual Hamilton walkers to capture wildlife, collect discoveries and explore nearby sightings.
 
-Start with the [high-level project overview](docs/planning/high-level-design.md): plain-language design, website purpose, three-person agent group, four-person website/demo group, and course phases. [Course reference](docs/planning/course-requirements.md) holds dates and sources.
+Read the [high-level concept and design](docs/planning/high-level-design.md) for the user experience, competitor positioning, two-group ownership and course phases. The [course reference](docs/planning/course-requirements.md) contains deadlines and verified research notes.
 
-First: verify reliable, faster-than-real-time game execution by September 27, before the September 28 topic freeze. Feasibility and performance are unproven. Users supply their own legally obtained ROM locally; no game content is distributed here.
+Expo/React Native, Google Maps and iPhone-first scope are decided; Android is deferred. Start with Expo Go and plan a development build for native integration. The user belongs to the four-person app/product group; the three-person group owns identification/data. The initial classifier covers familiar birds and mammals; exact species, sighting trust and privacy details remain under discussion. No model performance, local data coverage or product implementation has been verified. Team/project selection is due September 21; topics freeze September 28.
 
-Code belongs in `src/`, documents in `docs/`, and meeting records in `meetings/`. Planning was drafted with OpenAI Codex and awaits team review.
+Code belongs in `src/`, documents in `docs/`, and actual meeting records in `meetings/`. Planning is AI-assisted and awaits team review.

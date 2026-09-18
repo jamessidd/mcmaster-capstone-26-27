@@ -1,14 +1,12 @@
-# Local game material and generated artifacts must never enter the repository.
-/local/
-/roms/
-/generated/
-/build/
-/runs/
-/checkpoints/
-*.z64
-*.n64
-*.v64
-*.rom
-*.sav
-*.state
+# Local datasets, credentials and generated outputs
 .DS_Store
+.env
+.env.*
+!.env.example
+/data/
+/datasets/
+/models/
+/checkpoints/
+/runs/
+/build/
+/local/
