@@ -1,4 +1,4 @@
-# Spotted
+# Fieldnote
 
 **A camera-first wildlife app for McMaster students and casual Hamilton walkers: capture a discovery, learn what it might be, and choose whether to share it.**
 
@@ -15,7 +15,7 @@ The feel is playful collecting with a calm map and a photo-led social feed. We w
 
 A profile/avatar opens your public photo grid, account settings, privacy controls and drafts. It does not need another tab. Followed accounts and comments are possible additions; direct messaging is outside the first version.
 
-The references describe a feel: Snapchat's immediate camera access and VSCO's emphasis on photographs. Spotted's interaction is built around wildlife observations, not copying either app's full feature set.
+The references describe a feel: Snapchat's immediate camera access and VSCO's emphasis on photographs. Fieldnote's interaction is built around wildlife observations, not copying either app's full feature set.
 
 ## First-use tutorial and main journey
 
@@ -86,8 +86,8 @@ Approximate pins suit common wildlife; sensitive sightings may need park-level s
 
 Test per-species accuracy, confidently wrong predictions, unfamiliar/non-animal photos, model size and response time on named devices. Keep independent test observations separate from training. Check app usability, private-location leakage and upload recovery too.
 
-Seek already offers identification and badges; iNaturalist provides shared observations; Merlin supports bird discovery. Our proposed distinction is a welcoming camera-to-community experience for local walkers, with personal collecting and responsible sharing. Validate it with users rather than claim these individual features are new. [Research notes](course-requirements.md#spotted-research-notes).
+Seek already offers identification and badges; iNaturalist provides shared observations; Merlin supports bird discovery. Our proposed distinction is a welcoming camera-to-community experience for local walkers, with personal collecting and responsible sharing. Validate it with users rather than claim these individual features are new. [Research notes](course-requirements.md#Fieldnote-research-notes).
 
 Open decisions: available test iPhone and iOS version, exact species, backend/model runtime, identification review rules, and whether following/comments belong in the first release. P1 is the complete capture, identification, collection and protected sharing experience; seasonal challenges are P3. No implementation or measured performance exists yet.
 
-Version 0.8, 17 September 2026: selected iPhone first, with Android deferred. Version 0.7: camera-first Expo/Google Maps direction, four-tab proposal and two self-organizing groups; user belongs to the group of four. Versions 0.3–0.6 established Spotted, audience, wildlife scope and noncompetitive personality. User supplied the direction; Codex researched and drafted. Human review pending. Internal overview, not a submission template.
+Version 0.8, 17 September 2026: selected iPhone first, with Android deferred. Version 0.7: camera-first Expo/Google Maps direction, four-tab proposal and two self-organizing groups; user belongs to the group of four. Versions 0.3–0.6 established Fieldnote, audience, wildlife scope and noncompetitive personality. User supplied the direction; Codex researched and drafted. Human review pending. Internal overview, not a submission template.

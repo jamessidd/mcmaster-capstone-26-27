@@ -30,7 +30,7 @@ Plan PoC upload for **Nov 22** under slide set 3 p 4, with presentation Nov 23. 
 
 Staff should not need to compile code manually (slide set 3 p 20). Plan an installable demo or accessible deployment and staff test accounts where needed. Official templates, roster and staff assignments remain open.
 
-## Spotted research notes
+## Fieldnote research notes
 
 Checked 17 September 2026. Source availability is not proof that our chosen species, licenses, phone or compute budget work.
 
@@ -51,7 +51,7 @@ Hold out independent observations/photographers where possible and collect a sep
 
 Imported records must be labeled historical with original dates and provenance. Preserve source obscuration and uncertainty. An observed-sighting density map is not an animal-population estimate. Ask local walkers whether the proposed experience is useful; the original claim that trail groups rely on outdated forums has not been validated.
 
-Version 0.3 replaces previous technical references with Spotted research. User supplied the idea; Codex checked sources and drafted notes. Human verification pending. SRS means software requirements specification; V&V means verification and validation; ML means machine learning.
+Version 0.3 replaces previous technical references with Fieldnote research. User supplied the idea; Codex checked sources and drafted notes. Human verification pending. SRS means software requirements specification; V&V means verification and validation; ML means machine learning.
 
 
 ## Expo and Google Maps

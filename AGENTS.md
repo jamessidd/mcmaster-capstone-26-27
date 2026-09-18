@@ -19,9 +19,9 @@ Keep course artifacts in their expected locations: implementation under `src/`, 
 
 The final system must be runnable and independently testable by the course staff. For ML/RL work, define and report sound performance metrics; a model alone is not the product.
 
-## Project direction: Spotted
+## Project direction: Fieldnote
 
-The selected direction is **Spotted — local wildlife discovery, identification and sightings**. Confirmed choices: camera-first wildlife capture and nearby discovery for McMaster students and casual Hamilton walkers, delivered as an iPhone-first app using Expo/React Native and Google Maps. Defer Android until the iPhone experience is stable. Remaining product choices are being brainstormed. Use [the high-level overview](docs/planning/high-level-design.md) as the single concept document and [course reference](docs/planning/course-requirements.md) for evidence. Do not recreate a separate team plan or presentation unless requested.
+The selected direction is **Fieldnote — local wildlife discovery, identification and sightings**. Confirmed choices: camera-first wildlife capture and nearby discovery for McMaster students and casual Hamilton walkers, delivered as an iPhone-first app using Expo/React Native and Google Maps. Defer Android until the iPhone experience is stable. Remaining product choices are being brainstormed. Use [the high-level overview](docs/planning/high-level-design.md) as the single concept document and [course reference](docs/planning/course-requirements.md) for evidence. Do not recreate a separate team plan or presentation unless requested.
 
 - Preserve the agreed personality: playful collecting, a calm map and noncompetitive social sharing. Badges reward personal discovery, including private entries. Do not introduce leaderboards, public scores, rarity incentives, popularity-ranked sightings or punitive streaks. Reactions, comments and following are design choices to scope, not assumed commitments.
 - Develop a clear user purpose and compare it honestly with Seek, iNaturalist and Merlin. Do not claim identification, badges, nearby discovery or sighting maps are novel by themselves. Label proposed differentiators and untested user needs as hypotheses.

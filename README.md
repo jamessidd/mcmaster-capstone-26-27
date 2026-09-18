@@ -1,4 +1,4 @@
-# Spotted
+# Fieldnote
 
 McMaster COMP SCI 4ZP6, 2026–2027. A camera-first phone app for McMaster students and casual Hamilton walkers to capture wildlife, collect discoveries and explore nearby sightings.
 
